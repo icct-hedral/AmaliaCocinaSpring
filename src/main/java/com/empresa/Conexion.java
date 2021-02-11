@@ -3,8 +3,10 @@ package com.empresa;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+import org.springframework.context.annotation.Configuration;
 
 
+@Configuration
 public class Conexion {
 	
 	Connection con;

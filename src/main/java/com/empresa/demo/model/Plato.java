@@ -82,6 +82,7 @@ public class Plato implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+	//METODOS PARA EL STOCK
 	public int getStock() {
 		return stock;
 	}
@@ -89,6 +90,16 @@ public class Plato implements Serializable {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
+	
+	public void restarStock(Float stock) {
+        this.stock -= stock;
+    }
+	
+    public boolean sinStock() {
+        return this.stock <= 0;
+    }
+	
+	//
 
 	public String getImagen() {
 		return imagen;

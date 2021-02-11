@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.empresa.Conexion;
 import com.empresa.demo.interfaz.IPlato;
-import com.empresa.demo.model.Categoria;
 import com.empresa.demo.model.Plato;
 import com.empresa.demo.servicioInterfaz.IPlatoService;
 
@@ -30,14 +29,18 @@ public class PlatoServices implements IPlatoService {
 	@Override
 	public List<Plato> listar() {
 		
-		return data.findAll();
+		return (List<Plato>) data.findAll();
 	}
 
 	@Override
 	public Optional<Plato> buscarId(String id) {
 		
 		return data.findById(id);
+		
+		
 	}
+	
+		
 
 	@Override
 	public void eliminar(String id) {
@@ -54,19 +57,18 @@ public class PlatoServices implements IPlatoService {
 	public Plato listarId(String id) {
 		String sql="select * from plato where id_plato=" +id;
 		Plato p=new Plato();
-		Categoria c=new Categoria();
+		
 		try {
 			con=cn.getConnection();
 			ps=con.prepareStatement(sql);
 			rs=ps.executeQuery();
 			while (rs.next()) {
-				p.setId_plato(rs.getString(1));
-				c.setId_categoria(rs.getString(2));
-				p.setNombre(rs.getString(3));
-				p.setPrecio(rs.getDouble(4));
-				p.setDescripcion(rs.getString(5));
-				p.setStock(rs.getInt(6));
-				p.setImagen(rs.getNString(7));
+				p.setId_plato(rs.getString(1));			
+				p.setNombre(rs.getString(2));
+				p.setPrecio(rs.getFloat(3));
+				p.setDescripcion(rs.getString(4));
+				p.setStock(rs.getInt(5));
+				p.setImagen(rs.getString(6));
 			}
 			
 		} catch (Exception e) {
@@ -74,5 +76,4 @@ public class PlatoServices implements IPlatoService {
 		}
 		return p;
 	}
-
 }

@@ -1,16 +1,17 @@
 <!DOCTYPE html>
+
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:fragment="head">
-<meta charset="UTF-8">
-<title>CRUD</title>
 <link rel="stylesheet" th:href="@{/css/all.css}">
 <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 <link rel="stylesheet" th:href="@{/css/signin.css}">
 
+<head>
+<meta charset="ISO-8859-1">
+<title>Carrito de Compras</title>
 </head>
 <body>
-	<!-- BARRA DE NAVEGACION -->
+
 	<header th:fragment="header">
 		<nav class="navbar navbar-expand-lg navbar-warning bg-warning">
 			<div class="container">
@@ -35,14 +36,15 @@
 						</a></li>
 						<li class="nav-item" sec:authorize="isAuthenticated()"><a
 							class="nav-link" th:href="@{/vista_cliente}">CLIENTES</a></li>
-						<li class="nav-item" sec:authorize="isAuthenticated()">
-							<a class="nav-link" th:href="@{/listaplato}">PLATOS</a></li>
+						<li class="nav-item" sec:authorize="isAuthenticated()"><a
+							class="nav-link" th:href="@{/listaplato}">PLATOS</a></li>
 						<li class="nav-item"><a class="nav-link"
 							th:href="@{/platospedidos}">Realiza Pedido</a></li>
-						<li class="nav-item">
-							<a class="nav-link" th:href="@{/listarcarrito}" >
-							<i class="fas fa-cart-plus">(<label style="color:gray;" th:text="${contador}"></label>)</i>Carrito</a>
-						</li>
+						<li class="nav-item"><a class="nav-link"
+							th:href="@{/platospedidos}"> <i class="fas fa-cart-plus">(<label
+									style="color: gray;" th:text="${contador}"></label>)
+							</i>Seguir Comprando
+						</a></li>
 					</ul>
 
 					<ul class="navbar-nav nav-bar-right">
@@ -69,72 +71,58 @@
 							</div></li>
 					</ul>
 
-
 				</div>
 			</div>
-
 		</nav>
-
-
 	</header>
 
-	<!--CONTENIDO-->
-	<div class="container"></div>
+	<!-- LISTADO -->
 
-	<!-- PIE DE PAGINA -->
-	<footer th:fragment="footer"
-		class="bg-warning text-center text-white fixed-bottom">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-4 footer-col">
-					<h3>Dirección</h3>
-					<p>
-						Calle Los Jazmines N°184 <br /> Lince, Urb. San Eugenio
-					</p>
+	<div class="container mt-4">
+		<div class="row">
+			<div class="col-sm-8">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>ITEM</th>
+							<th>NOMBRES</th>
+							<th>DESCRIPCION</th>
+							<th>PRECIO</th>
+							<th>CANT</th>
+							<th>SUBTOTAL</th>
+							<th>ACCION</th>
+						<tr>
+					</thead>
+					<tbody>
+						<tr th:each="car:${carrito}">
+							<td th:text="${car.item}"></td>
+							<td th:text="${car.getNombres()}"></td>
+							<td th:text="${car.descripcion}"></td>
+							<td th:text="${car.precioCompra}"></td>
+							<td th:text="${car.cantidad}"></td>
+							<td th:text="${car.subTotal}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-sm-4">
+				<div class="card-header">
+					<h3>Generar Comprar:</h3>
 				</div>
-				<div class="col-md-4 footer-col">
-					<h3>Haz tu Pedido</h3>
-					<p>
-						Menú Del Día <br /> Fondo a la Carta <br /> Sopas y Ensaladas <br />
-						Entradas a la Carta <br />
-
-					</p>
-
-
-					<ul class="list-inline">
-						<li><a target="_blank" href="#"
-							class="btn-social btn-outline"><i
-								class="fa fa-fw fa-facebook"></i></a></li>
-						<li><a target="_blank" href="#"
-							class="btn-social btn-outline"><i
-								class="fa fa-fw fa-google-plus"></i></a></li>
-						<li><a target="_blank" href="#"
-							class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
-						</li>
-						<li><a target="_blank" href="#"
-							class="btn-social btn-outline"><i
-								class="fa fa-fw fa-linkedin"></i></a></li>
-						<li><a target="_blank" href="#"
-							class="btn-social btn-outline"><i
-								class="fa fa-fw fa-dribbble"></i></a></li>
-					</ul>
+				<div class="card-body">
+					<label>Subtotal:</label> <input type="text" readonly=""
+						class="form-control"> <label>Descuento:</label> <input
+						type="text" readonly="" class="form-control"> <label>Total
+						Pagar:</label> <input type="text" readonly="" class="form-control">
 				</div>
-				<div class="col-md-4 footer-col">
-					<h3>Nosotros</h3>
-					<p>
-						Quienes Somos? <br /> Contacto <br />
-					</p>
+				<div class="card-footer">
+					<a class="btn btn-info btn-block">Realizar Pago</a> <a
+						class="btn btn-danger btn-block">Generar Comprar</a> <a></a>
 				</div>
 			</div>
 		</div>
+	</div>
 
 
-
-		<script type="text/javascript"
-			th:src="@{/js/jquery-3.5.1.slim.min.js}"></script>
-		<script type="text/javascript" th:src="@{/js/popper.min.js}"></script>
-		<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
-
-	</footer>
 </body>
 </html>

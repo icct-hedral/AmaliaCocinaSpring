@@ -1,5 +1,6 @@
 package com.empresa.demo.model;
 
+//PRIMERA PRUEBA DE CARRITO
 public class Carrito {
 	
 	int item;
@@ -7,14 +8,14 @@ public class Carrito {
 	String nombres;
 	String descripcion;
 	double precioCompra;
-	int cantidad;
+	float cantidad;
 	double subTotal;
 	
 	public Carrito() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Carrito(int item, String idProducto, String nombres, String descripcion, double precioCompra, int cantidad,
+	public Carrito(int item, String idProducto, String nombres, String descripcion, double precioCompra, float cantidad,
 			double subTotal) {
 		super();
 		this.item = item;
@@ -66,11 +67,11 @@ public class Carrito {
 		this.precioCompra = precioCompra;
 	}
 
-	public int getCantidad() {
+	public float getCantidad() {
 		return cantidad;
 	}
 
-	public void setCantidad(int cantidad) {
+	public void setCantidad(float cantidad) {
 		this.cantidad = cantidad;
 	}
 
@@ -82,7 +83,7 @@ public class Carrito {
 		this.subTotal = subTotal;
 	}
 	
-	
+
 	
 
 }
